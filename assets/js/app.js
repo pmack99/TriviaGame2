@@ -19,10 +19,10 @@ var questions = [{
   
     question: "Graig Nettles played for third base for all of the following teams except...?",
     option1: "NY Yankees",
-    option2: "Baltimore Orioles",
+    option2: "Cleveland Indians",
     option3: "San Diego Padres",
-    option4: "Cleveland Indians",
-    answer: 1
+    option4: "Baltimore Orioles",
+    answer: 3
 
 },{
 
@@ -108,7 +108,7 @@ var nextButton = document.getElementById(nextButton);
 
 $('#startBtn').on('click', function(){
     $(this).hide();
-    newGame();
+    loadQuestion();
 });
 
 
@@ -123,11 +123,16 @@ function newGame(){
 	$('#finalMessage').empty();
 	$('#correctAnswers').empty();
 	$('#incorrectAnswers').empty();
-	$('#unanswered').empty();
+    $('#unanswered').empty();
+    $('#opt1').empty();
+    $('#opt2').empty();
+    $('#opt3').empty();
+    $('#opt4').empty();
 	currentQuestion = 0;
 	correctAnswer = 0;
 	incorrectAnswer = 0;
-	unanswered = 0;
+    unanswered = 0;
+    loadQuestion();
 }
 
 function loadQuestion(questionIndex){
@@ -175,6 +180,7 @@ function checkAnswer(){
 
 
         if(currentQuestion == totQuestions){
+
              container.style.display="none";
              $('#resultsContainer').show();
              $('#finalMessage').show();
