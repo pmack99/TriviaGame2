@@ -6,7 +6,6 @@
         <title>Trvia game</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="assets/css/reset.css" rel="stylesheet">
         <link href="assets/css/style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Poppins|Raleway" rel="stylesheet"> 
     </head>
@@ -14,19 +13,26 @@
        
         <div id="quizContainer" class="container">
             <div class="title">Trivia Game</div>
+            <button id="startBtn" class="start-btn" onclick="newGame();">Start</button> 
             <div id="currentQuestion" class="currentQuestion"></div>
             <div id="timer" class="timer"></div>
+            <div id="message" class="message"></div>
             <div id="question" class="question"></div>
-            <label class="option"><input type="radio" name="option" value="1" /> <span id="opt1"> </span></label>
-            <label class="option"><input type="radio" name="option" value="2" /> <span id="opt2"> </span></label>
-            <label class="option"><input type="radio" name="option" value="3" /> <span id="opt3"> </span></label>
-            <label class="option"><input type="radio" name="option" value="4" /> <span id="opt4"> </span></label>
-            <button id="startButton" class="start-btn" onclick="newGame();">Start</button> 
-            <button id="nextButton" class="next-btn" onclick="loadNextQuestion();">Next Question</button> 
+            <label class="option"><input type="radio" name="option" value="0" /> <span id="opt1"> </span></label>
+            <label class="option"><input type="radio" name="option" value="1" /> <span id="opt2"> </span></label>
+            <label class="option"><input type="radio" name="option" value="2" /> <span id="opt3"> </span></label>
+            <label class="option"><input type="radio" name="option" value="3" /> <span id="opt4"> </span></label>
+        
+            <button id="nextButton" class="next-btn" onclick="checkAnswer();">Next Question</button> 
 
         </div>
 
-        <div id="result" class="container result" style="display:none;">
+        <div id=finalMessage></div>
+        <div id=correctAnswers></div>
+        <div id=incorrectAnswers></div>
+        <div id=unanswered></div>
+        <hr>
+        <div id='reStartBtn'></div>
 
         </div>
 
