@@ -94,6 +94,7 @@ var unanswered = 0;
 var totQuestions = questions.length;
 var seconds = 0;
 var time = 0;
+var count=30;
 
 
 var container = document.getElementById("quizContainer");
@@ -102,13 +103,18 @@ var opt1 = document.getElementById("opt1");
 var opt2 = document.getElementById("opt2");
 var opt3 = document.getElementById("opt3");
 var opt4 = document.getElementById("opt4");
-
+var counter=setInterval(timer, 1000); 
 var nextButton = document.getElementById(nextButton);
+
+$(document).ready(function() {
+    console.log( "ready!" );
+});
 
 
 $('#startBtn').on('click', function(){
     $(this).hide();
     loadQuestion();
+    timer();
 });
 
 
@@ -118,6 +124,23 @@ $('#reStartBtn').on('click', function(){
     $("#quizContainer").show();
     newGame();
 });
+
+
+
+function timer()
+{
+  count=count-1;
+  if (count <= 0)
+  {
+     clearInterval(counter);
+     unanswered++;
+     loadQuestion();
+     $('#message').html(messages.endTime);
+     return;
+  }
+
+  document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+}
 
 function newGame(){
 	$('#finalMessage').empty();
@@ -143,6 +166,7 @@ function loadQuestion(questionIndex){
     opt3.textContent = q.option3;
     opt4.textContent = q.option4;
     $("#currentQuestion").html("Question #"+(currentQuestion+1)+" / "+questions.length);
+    
     
 }
 
