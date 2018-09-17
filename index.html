@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Trvia game</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="assets/css/reset.css" rel="stylesheet">
+        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins|Raleway" rel="stylesheet"> 
+    </head>
+    <body>
+       
+        <div id="quizContainer" class="container">
+            <div class="title">Trivia Game</div>
+            <div id="currentQuestion" class="currentQuestion"></div>
+            <div id="timer" class="timer"></div>
+            <div id="question" class="question"></div>
+            <label class="option"><input type="radio" name="option" value="1" /> <span id="opt1"> </span></label>
+            <label class="option"><input type="radio" name="option" value="2" /> <span id="opt2"> </span></label>
+            <label class="option"><input type="radio" name="option" value="3" /> <span id="opt3"> </span></label>
+            <label class="option"><input type="radio" name="option" value="4" /> <span id="opt4"> </span></label>
+            <button id="nextButton" class="next-btn" onclick="loadNextQuestion();">Next Quetion</button> 
+
+        </div>
+
+        <div id="result" class="container result" style="display:none;">
+
+        </div>
+
+
+
+        
+        <script src="https://code.jquery.com/jquery.js"></script>           
+        <script type="text/javascript" src="assets/js/app.js"></script>
+    </body>
+</html>
