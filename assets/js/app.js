@@ -26,16 +26,59 @@ var questions = [{
 
 },{
 
-    question: "What baseball great is known for such colorful sayings as 'It ain't over till it's over'?",
-    option1: "Yogi Berra",
-    option2: "Whitey Herzog",
-    option3: "Billy Martin",
-    option4: "Honus Wagner",
+    question: "What is the distance from home plate to the pitching rubber?",
+    option1: "46'-6",
+    option2: "46'",
+    option3: "90'",
+    option4: "60'-6",
+    answer: 3
+
+},{
+
+    question: "What team moved to Washington, D.C. to become the Washington Nationals in 2005?",
+    option1: "Montreal Expos",
+    option2: "Washington Senators",
+    option3: "Brooklyn Dodgers",
+    option4: "Minnesota Twins",
+    answer: 0
+
+},{
+
+    question: "Before playing in the Major Leagues, Jackie Robinson played with the minor league Montreal Royals, the top farm club of which organization?",
+    option1: "Colt 45's",
+    option2: "KC Royals",
+    option3: "Brookyn Dodgers",
+    option4: "Houston Astros",
+    answer: 2
+},{
+
+    question: "What player was accused of using too much pine tar on his bat on July 24, 1983, causing his game-winning home run to be nullified?",
+    option1: "Graig Nettles",
+    option2: "George Brett",
+    option3: "Reggie Jackson",
+    option4: "Dick Howser",
+    answer: 1
+
+},{
+
+    question: "Who is the only pitcher in Major League Baseball to win a World Series game in three different decades?",
+    option1: "Whitey Ford",
+    option2: "Mike Scott",
+    option3: "JR Richard",
+    option4: "Jim Palmer",
+    answer: 3
+
+},{
+
+    question: "Who holds the highest career batting average of all time?",
+    option1: "Ty Cobb",
+    option2: "Pete Rose",
+    option3: "Ichiro",
+    option4: "Dave Kingman",
     answer: 0
 
 
 }];
-
 
 var messages = {
 	correct: "YES! You are right!",
@@ -61,11 +104,18 @@ var opt3 = document.getElementById("opt3");
 var opt4 = document.getElementById("opt4");
 
 var nextButton = document.getElementById(nextButton);
-var resultContainer = document.getElementById(result);
 
 
 $('#startBtn').on('click', function(){
     $(this).hide();
+    newGame();
+});
+
+
+$('#reStartBtn').on('click', function(){
+    $(this).hide();
+    $('#resultsContainer').hide();
+    $("#quizContainer").show();
     newGame();
 });
 
@@ -79,9 +129,6 @@ function newGame(){
 	incorrectAnswer = 0;
 	unanswered = 0;
 }
-
-
-
 
 function loadQuestion(questionIndex){
     var q = questions[questionIndex];
@@ -101,33 +148,44 @@ function checkAnswer(){
         return;
     }
     var answer = selectedOption.value;
-    if(questions[currentQuestion].answer == answer){
-        correctAnswer++;
-        console.log(correctAnswer);
-        currentQuestion++;
-        $('#message').html(messages.correct);
-        console.log(messages.correct);
+
+        if(questions[currentQuestion].answer == answer){
+            correctAnswer++;
+            console.log(selectedOption.value);
+            currentQuestion++;
+            $('#message').html(messages.correct);
+            console.log(messages.correct);
+            
+
+        //need to clear the radio button value after checking answer
+
+        //document.getElementById('clear-button').addEventListener('click', function () {
+           // ["opt1", "opt2", "opt3", "opt4"].forEach(function(id) {
+            //  document.getElementById(id).checked = false;
+           // });
+           // return false;
+         // })
     }
-    selectedOption.checked = false;
+    selectedOption.checked == false;
     currentQuestion++;
-    incorrectAnswer--;
-    console.log(incorrectAnswer);
+    incorrectAnswer++;
+    console.log(selectedOption.value);
     $('#message').html(messages.incorrect);
     console.log(messages.incorrect);
 
 
-    if(currentQuestion == totQuestions){
-        container.style.display="none";
-        $('#finalMessage').show();
-        $('#finalMessage').html(messages.finished);
-        $('#correctAnswers').show();
-        $('#correctAnswers').html("Correct = " + correctAnswer);
-        $('#incorrectAnswers').show();
-        $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
-        $('#unanswered').show();
-        $('#unanswered').html("Unanswered = " + unanswered);
-        
-        return;
+        if(currentQuestion == totQuestions){
+             container.style.display="none";
+             $('#resultsContainer').show();
+             $('#finalMessage').show();
+             $('#finalMessage').html(messages.finished);
+             $('#correctAnswers').show();
+             $('#correctAnswers').html("Correct = " + correctAnswer);
+             $('#incorrectAnswers').show();
+             $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
+             $('#unanswered').show();
+             $('#unanswered').html("Unanswered = " + unanswered);
+            return;
     }
     loadQuestion(currentQuestion);
 }
