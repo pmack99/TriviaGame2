@@ -113,8 +113,7 @@ $(document).ready(function() {
 
 $('#startBtn').on('click', function(){
     $(this).hide();
-    loadQuestion();
-    timer();
+    newGame();
 });
 
 
@@ -139,7 +138,7 @@ function timer()
      return;
   }
 
-  document.getElementById("timer").innerHTML=count + " secs"; // watch for spelling
+  document.getElementById("timer").innerHTML=count + " secs"; 
 }
 
 function newGame(){
@@ -147,10 +146,6 @@ function newGame(){
 	$('#correctAnswers').empty();
 	$('#incorrectAnswers').empty();
     $('#unanswered').empty();
-    $('#opt1').empty();
-    $('#opt2').empty();
-    $('#opt3').empty();
-    $('#opt4').empty();
 	currentQuestion = 0;
 	correctAnswer = 0;
 	incorrectAnswer = 0;
@@ -213,8 +208,9 @@ function checkAnswer(){
              $('#correctAnswers').html("Correct = " + correctAnswer);
              $('#incorrectAnswers').show();
              $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
-             $('#unanswered').show();
              $('#unanswered').html("Unanswered = " + unanswered);
+             $('#reStartBtn').show();
+             
             return;
     }
     loadQuestion(currentQuestion);
