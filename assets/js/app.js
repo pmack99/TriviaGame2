@@ -105,7 +105,6 @@ var opt1 = $("#opt1Box");
 var opt2 = $("#opt2Box");
 var opt3 = $("#opt3Box");
 var opt4 = $("#opt4Box");
-//var counter = setInterval(timer, 1000);
 var nextButton = document.getElementById(nextButton);
 
 $(document).ready(function () {
@@ -168,7 +167,7 @@ function loadNextQuestion() {
 
     window.setTimeout(function(){
         $("#contentBox").show();   
-        $("#message").remove();
+        $("#message").empty();
          }, 3000);
     
     var q = questions[currentQuestion];
@@ -194,25 +193,25 @@ function checkAnswer() {
 
     if (questions[currentQuestion].answer == answer) {
         correctAnswer++;
-        var sound = document.getElementById("audio");
-        sound.play();
-        //console.log(selectedOption.value);
         currentQuestion++;
         $('#message').html(messages.correct);
-        //console.log(messages.correct);
         $("#contentBox").hide();
+        var sound = document.getElementById("audio");
+        sound.play();
+            window.setTimeout(function(){
+        $("#contentBox").show();   
+        $("#message").empty();
+         }, 3000);
         loadNextQuestion();
         
 
     } else {
         currentQuestion++;
         incorrectAnswer++;
+        $('#message').html(messages.incorrect);
+        $("#contentBox").hide();
         var sound = document.getElementById("audio_three");
         sound.play();
-        //console.log(selectedOption.value);
-        $('#message').html(messages.incorrect);
-        //console.log(messages.incorrect);
-        $("#contentBox").hide();
         loadNextQuestion();
         
     }
@@ -233,7 +232,7 @@ function checkAnswer() {
 
         return;
     }
-    loadQuestion(currentQuestion);
+    
 }
 
 loadQuestion(currentQuestion);
