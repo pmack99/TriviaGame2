@@ -205,19 +205,14 @@ function loadNextQuestion() {
             $("#message").empty();
             }, 1800);
 
+    if (currentQuestion === totQuestions) {
+            endGame();
 
-if (currentQuestion === totQuestions) {
-        
-    endGame();
-
-} else {
-    loadQuestion();
+    } else {
+            loadQuestion();
 }
-            
-          
+                     
 }
-
-  
 
 function checkAnswer() {
     var selectedOption = document.querySelector("input[type=radio]:checked");
