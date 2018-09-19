@@ -137,6 +137,9 @@ function timer(){
         $('#message').html(messages.endTime);
         $("#contentBox").hide();
         unanswered++;
+        currentQuestion++;
+        timeleft = 32;
+        loadNextQuestion(currentQuestion);
 }
 }
 function newGame(){
@@ -167,7 +170,7 @@ function loadNextQuestion() {
         window.setTimeout(function(){
             $("#contentBox").show();   
             $("#message").empty();
-            }, 1700);
+            }, 1500);
             
             loadQuestion();
 }
