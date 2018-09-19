@@ -95,7 +95,6 @@ var totQuestions = questions.length;
 var seconds = 0;
 var time = 0;
 var count = 30;
-var timer;
 var sound;
 
 
@@ -117,6 +116,7 @@ $('#startBtn').on('click', function () {
     $("#startArea").hide();
     $(".container").show();
     newGame();
+    timer();
 });
 
 
@@ -130,17 +130,17 @@ $('#reStartBtn').on('click', function () {
 });
 
 
-//function timer() {
-    //count = count - 1;
-    //if (count <= 0) {
-     //   clearInterval(counter);
-     //   unanswered++;
-     //   loadQuestion();
-     //   $('#message').html(messages.endTime);
-     //   return;
-   // }
-    //document.getElementById("timer").innerHTML = count + " secs";
-//}
+function timer() {
+    count = count - 1;
+    if (count <= 0) {
+        clearInterval(counter);
+        unanswered++;
+        loadQuestion();
+        $('#message').html(messages.endTime);
+        return;
+    }
+    $("timer").innerHTML = count + " secs";
+}
 
 function newGame() {
     $('#finalMessage').empty();
@@ -170,16 +170,9 @@ function loadNextQuestion() {
     window.setTimeout(function(){
         $("#contentBox").show();   
         $("#message").empty();
-         }, 2000);
+         }, 1700);
     
-    var q = questions[currentQuestion];
-    questionBox.textContent = (currentQuestion + 1) + " . " + q.question;
-    opt1Box.textContent = q.option1;
-    opt2Box.textContent = q.option2;
-    opt3Box.textContent = q.option3;
-    opt4Box.textContent = q.option4;
-    $("#currentQuestion").html("Question #" + (currentQuestion + 1) + " / " + questions.length);
-
+         loadQuestion();
 }
 
 function checkAnswer() {
@@ -203,13 +196,7 @@ function checkAnswer() {
         var sound = document.getElementById("audio");
         sound.play();
 
-        window.setTimeout(function(){
-            $("#contentBox").show();   
-            $("#message").empty();
-         }, 3000);
-        
-        
-
+                
     } else {
         currentQuestion++;
         incorrectAnswer++;
