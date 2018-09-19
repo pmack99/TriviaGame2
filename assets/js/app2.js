@@ -111,6 +111,30 @@ $(document).ready(function () {
     console.log("ready!");
 });
 
+function timer(){
+    
+    timeleft-- ;
+    document.getElementById("countdowntimer").textContent = timeleft;
+    if (timeleft === 0){
+        $('#message').html(messages.endTime);
+        $("#contentBox").hide();
+        unanswered++;
+    }
+
+function newGame() {
+    $('#finalMessage').empty();
+    $('#correctAnswers').empty();
+    $('#incorrectAnswers').empty();       
+     $('#unanswered').empty();
+    currentQuestion = 0;
+    correctAnswer = 0;
+    incorrectAnswer = 0;
+    unanswered = 0;
+    timeleft = 30;   
+    }
+    
+
+
 $('#startBtn').on('click', function () {
     $(this).hide();
     $("#startArea").hide();
@@ -128,31 +152,9 @@ $('#reStartBtn').on('click', function () {
     newGame();
     loadQuestion();
 });
-
-function timer(){
     
-    timeleft-- ;
-    document.getElementById("countdowntimer").textContent = timeleft;
-    if (timeleft === 0){
-        $('#message').html(messages.endTime);
-        $("#contentBox").hide();
-        unanswered++;
-}
-}
-function newGame(){
-    $('#finalMessage').empty();
-    $('#correctAnswers').empty();
-    $('#incorrectAnswers').empty();       
-    $('#unanswered').empty();
-    currentQuestion = 0;
-    correctAnswer = 0;
-    incorrectAnswer = 0;
-    unanswered = 0;
-    timeleft = 30;   
-}
 
-    
-function loadQuestion() {
+    function loadQuestion() {
         var q = questions[currentQuestion];
         questionBox.textContent = (currentQuestion + 1) + " . " + q.question;
         opt1Box.textContent = q.option1;
@@ -160,9 +162,10 @@ function loadQuestion() {
         opt3Box.textContent = q.option3;
         opt4Box.textContent = q.option4;
         $("#currentQuestion").html("Question #" + (currentQuestion + 1) + " / " + questions.length);
-}
-
-function loadNextQuestion() {
+        
+    }
+        
+    function loadNextQuestion() {
         
         window.setTimeout(function(){
             $("#contentBox").show();   
@@ -170,8 +173,9 @@ function loadNextQuestion() {
             }, 1700);
             
             loadQuestion();
-}
-  
+        }
+      
+
 
 function checkAnswer() {
     var selectedOption = document.querySelector("input[type=radio]:checked");
@@ -194,7 +198,8 @@ function checkAnswer() {
 
         var sound = document.getElementById("audio");
         sound.play();
-       
+
+                
     } else {
         currentQuestion++;
         incorrectAnswer++;
@@ -205,6 +210,8 @@ function checkAnswer() {
 
         var sound = document.getElementById("audio_three");
         sound.play();
+        
+        
     }
 
 
