@@ -95,15 +95,17 @@ var totQuestions = questions.length;
 var seconds = 0;
 var time = 0;
 var count = 30;
+var timer;
+var sound;
 
 
-var container = document.getElementById("quizContainer");
-var questionEl = document.getElementById("question");
-var opt1 = document.getElementById("opt1");
-var opt2 = document.getElementById("opt2");
-var opt3 = document.getElementById("opt3");
-var opt4 = document.getElementById("opt4");
-var counter = setInterval(timer, 1000);
+var container = $("#quizContainer");
+var questionEl = $("#questionBox");
+var opt1 = $("#opt1Box");
+var opt2 = $("#opt2Box");
+var opt3 = $("#opt3Box");
+var opt4 = $("#opt4Box");
+//var counter = setInterval(timer, 1000);
 var nextButton = document.getElementById(nextButton);
 
 $(document).ready(function () {
@@ -113,6 +115,8 @@ $(document).ready(function () {
 
 $('#startBtn').on('click', function () {
     $(this).hide();
+    $("#startArea").hide();
+    $(".container").show();
     newGame();
 });
 
@@ -125,19 +129,17 @@ $('#reStartBtn').on('click', function () {
 });
 
 
-
-function timer() {
-    count = count - 1;
-    if (count <= 0) {
-        clearInterval(counter);
-        unanswered++;
-        loadQuestion();
-        $('#message').html(messages.endTime);
-        return;
-    }
-
-    document.getElementById("timer").innerHTML = count + " secs";
-}
+//function timer() {
+    //count = count - 1;
+    //if (count <= 0) {
+     //   clearInterval(counter);
+     //   unanswered++;
+     //   loadQuestion();
+     //   $('#message').html(messages.endTime);
+     //   return;
+   // }
+    //document.getElementById("timer").innerHTML = count + " secs";
+//}
 
 function newGame() {
     $('#finalMessage').empty();
@@ -153,13 +155,29 @@ function newGame() {
 
 function loadQuestion() {
     var q = questions[currentQuestion];
-    questionEl.textContent = (currentQuestion + 1) + " . " + q.question;
-    opt1.textContent = q.option1;
-    opt2.textContent = q.option2;
-    opt3.textContent = q.option3;
-    opt4.textContent = q.option4;
+    questionBox.textContent = (currentQuestion + 1) + " . " + q.question;
+    opt1Box.textContent = q.option1;
+    opt2Box.textContent = q.option2;
+    opt3Box.textContent = q.option3;
+    opt4Box.textContent = q.option4;
     $("#currentQuestion").html("Question #" + (currentQuestion + 1) + " / " + questions.length);
 
+}
+
+function loadNextQuestion() {
+
+    window.setTimeout(function(){
+        $("#contentBox").show();   
+        $("#message").remove();
+         }, 3000);
+    
+    var q = questions[currentQuestion];
+    questionBox.textContent = (currentQuestion + 1) + " . " + q.question;
+    opt1Box.textContent = q.option1;
+    opt2Box.textContent = q.option2;
+    opt3Box.textContent = q.option3;
+    opt4Box.textContent = q.option4;
+    $("#currentQuestion").html("Question #" + (currentQuestion + 1) + " / " + questions.length);
 
 }
 
@@ -176,34 +194,33 @@ function checkAnswer() {
 
     if (questions[currentQuestion].answer == answer) {
         correctAnswer++;
-        console.log(selectedOption.value);
+        var sound = document.getElementById("audio");
+        sound.play();
+        //console.log(selectedOption.value);
         currentQuestion++;
         $('#message').html(messages.correct);
-        console.log(messages.correct);
+        //console.log(messages.correct);
+        $("#contentBox").hide();
+        loadNextQuestion();
+        
 
-
-        //need to clear the radio button value after checking answer
-
-        //document.getElementById('clear-button').addEventListener('click', function () {
-        // ["opt1", "opt2", "opt3", "opt4"].forEach(function(id) {
-        //  document.getElementById(id).checked = false;
-        // });
-        // return false;
-        // })
     } else {
         currentQuestion++;
         incorrectAnswer++;
-        console.log(selectedOption.value);
+        var sound = document.getElementById("audio_three");
+        sound.play();
+        //console.log(selectedOption.value);
         $('#message').html(messages.incorrect);
-        console.log(messages.incorrect);
+        //console.log(messages.incorrect);
+        $("#contentBox").hide();
+        loadNextQuestion();
+        
     }
-    selectedOption.checked == false;
-
 
 
     if (currentQuestion == totQuestions) {
 
-        container.style.display = "none";
+        $("#quizContainer").hide();
         $('#resultsContainer').show();
         $('#finalMessage').show();
         $('#finalMessage').html(messages.finished);

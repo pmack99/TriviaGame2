@@ -9,7 +9,24 @@ body{
     justify-content: center;
   }
 
+#startArea{
+    text-align: center;
+    height:300px;
+    width:400px;
+    position: absolute;
+    border-radius: 25px;
+    top:50%;
+    left:50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: lightcyan;
+    padding:20px;
+    border:1px solid black;
+    box-shadow: gray
+
+}
+
 .container{
+    display: none;
     height:500px;
     width:1000px;
     position: absolute;
@@ -21,6 +38,7 @@ body{
     padding:20px;
     border:1px solid black;
     box-shadow: gray
+   
 }
 
 .rContainer{
@@ -31,7 +49,7 @@ body{
     top:50%;
     left:50%;
     transform: translateX(-50%) translateY(-50%);
-    background-color: lightcoral;
+    background-color: tan;
     padding:20px;
     border:1px solid black;
     box-shadow: gray
@@ -57,7 +75,7 @@ body{
     color: black;
 }
 
-.question{
+.questionBox{
     padding: 20px;
     font-size: 20px;
     background: lightblue;
@@ -105,7 +123,7 @@ body{
     height: 40px;
     border-radius: 20px;
     cursor: pointer;
-    float: right;
+    float: center;
 }
 
 #reStartBtn{
@@ -114,10 +132,10 @@ body{
     background: royalblue;
     color: whitesmoke;
     width: 100px;
-    height: 50px;
+    height: 40px;
     border-radius: 20px;
     cursor: pointer;
-    float: right;
+    float: center;
 
 }
 
@@ -150,3 +168,13 @@ body{
 #resultsContainer{
     display: none;
 }
+
+#bg {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    opacity: .4;
+  }
