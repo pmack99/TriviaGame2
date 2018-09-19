@@ -93,6 +93,7 @@ var incorrectAnswer = 0;
 var unanswered = 0;
 var totQuestions = questions.length;
 var sound;
+var counter;
 var timeleft = 30;
 
 
@@ -103,6 +104,7 @@ var opt2 = $("#opt2Box");
 var opt3 = $("#opt3Box");
 var opt4 = $("#opt4Box");
 var nextButton = document.getElementById(nextButton);
+counter = setInterval(timer, 1000);
 
 
 $(document).ready(function () {
@@ -110,19 +112,64 @@ $(document).ready(function () {
 });
 
 
-var downloadTimer = setInterval(function(){
-timeleft--;
-document.getElementById("countdowntimer").textContent = timeleft;
-if(timeleft <= 0)
-    clearInterval(downloadTimer);
-},1000);
+//var downloadTimer = setInterval(function(){
+  //  timeleft--;
+  //  document.getElementById("countdowntimer").textContent = timeleft;
+//if(timeleft === 0)
+  //  clearInterval(downloadTimer);
 
+//},1000);
+
+
+function timer(){
+    
+    timeleft-- ;
+    $("#countdowntimer").html("<h2>" + timeleft + "</h2>" );
+    if (timeleft === 0){
+      alert("Times Up!")
+      stop(); 
+    }
+
+function newGame() {
+    $('#finalMessage').empty();
+    $('#correctAnswers').empty();
+    $('#incorrectAnswers').empty();       
+     $('#unanswered').empty();
+    currentQuestion = 0;
+    correctAnswer = 0;
+    incorrectAnswer = 0;
+    unanswered = 0;
+    timeleft = 5;   
+    }
+    
+function loadQuestion() {
+    var q = questions[currentQuestion];
+    questionBox.textContent = (currentQuestion + 1) + " . " + q.question;
+    opt1Box.textContent = q.option1;
+    opt2Box.textContent = q.option2;
+    opt3Box.textContent = q.option3;
+    opt4Box.textContent = q.option4;
+    $("#currentQuestion").html("Question #" + (currentQuestion + 1) + " / " + questions.length);
+    
+    }
+    
+function loadNextQuestion() {
+    
+    window.setTimeout(function(){
+        $("#contentBox").show();   
+        $("#message").empty();
+        }, 1700);
+        
+        loadQuestion();
+    }
+    
 
 $('#startBtn').on('click', function () {
     $(this).hide();
     $("#startArea").hide();
     $(".container").show();
     newGame();
+    timer();
 });
 
 
@@ -136,47 +183,6 @@ $('#reStartBtn').on('click', function () {
 });
 
 
-function newGame() {
-    $('#finalMessage').empty();
-    $('#correctAnswers').empty();
-    $('#incorrectAnswers').empty();
-    $('#unanswered').empty();
-    currentQuestion = 0;
-    correctAnswer = 0;
-    incorrectAnswer = 0;
-    unanswered = 0;
-    timeleft = 30;
-    
-}
-
-function loadQuestion() {
-    var q = questions[currentQuestion];
-    questionBox.textContent = (currentQuestion + 1) + " . " + q.question;
-    opt1Box.textContent = q.option1;
-    opt2Box.textContent = q.option2;
-    opt3Box.textContent = q.option3;
-    opt4Box.textContent = q.option4;
-    $("#currentQuestion").html("Question #" + (currentQuestion + 1) + " / " + questions.length);
-
-}
-
-function loadNextQuestion() {
-
-    window.setTimeout(function(){
-        $("#contentBox").show();   
-        $("#message").empty();
-         }, 1700);
-    
-         loadQuestion();
-}
-
-    if (timeleft <= 0){
-        unanswered++;
-        currentQuestion++;
-        $('#message').html(messages.endTime);
-        $("#contentBox").hide();
-        loadNextQuestion(currentQuestion);
-    }
 
 function checkAnswer() {
     var selectedOption = document.querySelector("input[type=radio]:checked");
@@ -243,5 +249,5 @@ function checkAnswer() {
 
 loadQuestion(currentQuestion);
 
-
+}
 
