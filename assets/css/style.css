@@ -3,6 +3,16 @@ body{
     background: lightgray;
 }
 
+#bg {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    opacity: .4;
+  }
+
 #wrapper {
     display: flex;
     align-items: center;
@@ -116,7 +126,13 @@ body{
     height: 40px;
     border-radius: 20px;
     cursor: pointer;
-    float: right;
+    float: center;
+}
+
+#buttonBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;  
 }
 
 .start-btn{
@@ -174,12 +190,3 @@ body{
     display: none;
 }
 
-#bg {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-    opacity: .4;
-  }

@@ -138,7 +138,7 @@ function timer(){
         $("#contentBox").hide();
         unanswered++;
         currentQuestion++;
-        timeleft = 32;
+        timeleft = 30;
         loadNextQuestion(currentQuestion);
 }
 }
@@ -170,7 +170,7 @@ function loadNextQuestion() {
         window.setTimeout(function(){
             $("#contentBox").show();   
             $("#message").empty();
-            }, 1500);
+            }, 1800);
             
             loadQuestion();
 }
