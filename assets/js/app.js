@@ -92,10 +92,9 @@ var correctAnswer = 0;
 var incorrectAnswer = 0;
 var unanswered = 0;
 var totQuestions = questions.length;
-var seconds = 0;
-var time = 0;
-var count = 30;
 var sound;
+var timeleft = 10;
+
 
 
 var container = $("#quizContainer");
@@ -106,9 +105,18 @@ var opt3 = $("#opt3Box");
 var opt4 = $("#opt4Box");
 var nextButton = document.getElementById(nextButton);
 
+
 $(document).ready(function () {
     console.log("ready!");
 });
+
+
+var downloadTimer = setInterval(function(){
+timeleft--;
+document.getElementById("countdowntimer").textContent = timeleft;
+if(timeleft <= 0)
+    clearInterval(downloadTimer);
+},1000);
 
 
 $('#startBtn').on('click', function () {
@@ -116,7 +124,6 @@ $('#startBtn').on('click', function () {
     $("#startArea").hide();
     $(".container").show();
     newGame();
-    timer();
 });
 
 
@@ -129,18 +136,6 @@ $('#reStartBtn').on('click', function () {
     loadQuestion();
 });
 
-
-function timer() {
-    count = count - 1;
-    if (count <= 0) {
-        clearInterval(counter);
-        unanswered++;
-        loadQuestion();
-        $('#message').html(messages.endTime);
-        return;
-    }
-    $("timer").innerHTML = count + " secs";
-}
 
 function newGame() {
     $('#finalMessage').empty();
