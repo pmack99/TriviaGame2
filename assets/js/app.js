@@ -142,6 +142,7 @@ function timer(){
         timeleft = 30;
         loadNextQuestion(currentQuestion);
     if (currentQuestion == totQuestions) {
+        currentQuestion = 0;
         endGame()
     }
 }
@@ -171,6 +172,7 @@ function endGame(){
     $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
     $('#unanswered').html("Unanswered = " + unanswered);
     $('#reStartBtn').show();
+    currentQuestion = 0;
     if (correctAnswer > incorrectAnswer){
         var sound = document.getElementById("audio_four");
         sound.play();
