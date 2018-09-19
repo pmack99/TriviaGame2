@@ -94,7 +94,7 @@ var unanswered = 0;
 var totQuestions = questions.length;
 var sound;
 var counter;
-var timeleft = 30;
+var timeleft = 10;
 
 
 var container = $("#quizContainer");
@@ -139,10 +139,10 @@ function timer(){
         $("#contentBox").hide();
         unanswered++;
         currentQuestion++;
-        timeleft = 30;
+        timeleft = 10;
         loadNextQuestion(currentQuestion);
     if (currentQuestion == totQuestions) {
-        currentQuestion = 0;
+        
         endGame()
     }
 }
@@ -157,7 +157,7 @@ function newGame(){
     correctAnswer = 0;
     incorrectAnswer = 0;
     unanswered = 0;
-    timeleft = 30;   
+    timeleft = 10;   
 }
 
 function endGame(){
@@ -172,7 +172,7 @@ function endGame(){
     $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
     $('#unanswered').html("Unanswered = " + unanswered);
     $('#reStartBtn').show();
-    currentQuestion = 0;
+    
     if (correctAnswer > incorrectAnswer){
         var sound = document.getElementById("audio_four");
         sound.play();
@@ -219,7 +219,7 @@ function checkAnswer() {
     if (questions[currentQuestion].answer == answer) {
         correctAnswer++;
         currentQuestion++;
-        timeleft = 32;
+        timeleft = 12;
 
         $('#message').html(messages.correct);
         $("#contentBox").hide();
@@ -230,7 +230,7 @@ function checkAnswer() {
     } else {
         currentQuestion++;
         incorrectAnswer++;
-        timeleft = 32;
+        timeleft = 12;
 
         $('#message').html(messages.incorrect);
         $("#contentBox").hide();
