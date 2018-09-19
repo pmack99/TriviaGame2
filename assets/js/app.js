@@ -119,6 +119,10 @@ $('#startBtn').on('click', function () {
     timer();
 });
     
+$('#nextButton').on('click', function () {
+    checkAnswer();
+
+});
     
 $('#reStartBtn').on('click', function () {
     $(this).hide();
@@ -141,10 +145,10 @@ function timer(){
         currentQuestion++;
         timeleft = 10;
         loadNextQuestion(currentQuestion);
-    if (currentQuestion == totQuestions) {
+    //if (currentQuestion == totQuestions) {
         
-        endGame()
-    }
+       // endGame()
+    //}
 }
  
 }
@@ -200,9 +204,19 @@ function loadNextQuestion() {
             $("#contentBox").show();   
             $("#message").empty();
             }, 1800);
-            
-            loadQuestion();
+
+
+if (currentQuestion === totQuestions) {
+        
+    endGame();
+
+} else {
+    loadQuestion();
 }
+            
+          
+}
+
   
 
 function checkAnswer() {
@@ -240,28 +254,7 @@ function checkAnswer() {
     }
 
 
-    if (currentQuestion == totQuestions) {
 
-       $("#quizContainer").hide();
-        $('#resultsContainer').show();
-        $('#finalMessage').show();
-        $('#finalMessage').html(messages.finished);
-        $('#correctAnswers').show();
-        $('#correctAnswers').html("Correct = " + correctAnswer);
-        $('#incorrectAnswers').show();
-        $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
-        $('#unanswered').html("Unanswered = " + unanswered);
-       $('#reStartBtn').show();
-        if (correctAnswer > incorrectAnswer){
-            var sound = document.getElementById("audio_four");
-            sound.play();
-        }
-        if (incorrectAnswer > correctAnswer){
-           var sound = document.getElementById("audio_two");
-            sound.play();
-     }
-
-    }
     loadNextQuestion(currentQuestion);
 }
 
