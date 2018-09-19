@@ -93,8 +93,7 @@ var incorrectAnswer = 0;
 var unanswered = 0;
 var totQuestions = questions.length;
 var sound;
-var timeleft = 10;
-
+var timeleft = 30;
 
 
 var container = $("#quizContainer");
@@ -146,6 +145,7 @@ function newGame() {
     correctAnswer = 0;
     incorrectAnswer = 0;
     unanswered = 0;
+    timeleft = 30;
     
 }
 
@@ -170,6 +170,14 @@ function loadNextQuestion() {
          loadQuestion();
 }
 
+    if (timeleft <= 0){
+        unanswered++;
+        currentQuestion++;
+        $('#message').html(messages.endTime);
+        $("#contentBox").hide();
+        loadNextQuestion(currentQuestion);
+    }
+
 function checkAnswer() {
     var selectedOption = document.querySelector("input[type=radio]:checked");
     if (!selectedOption) {
@@ -184,6 +192,7 @@ function checkAnswer() {
     if (questions[currentQuestion].answer == answer) {
         correctAnswer++;
         currentQuestion++;
+        timeleft = 32;
 
         $('#message').html(messages.correct);
         $("#contentBox").hide();
@@ -195,6 +204,7 @@ function checkAnswer() {
     } else {
         currentQuestion++;
         incorrectAnswer++;
+        timeleft = 32;
 
         $('#message').html(messages.incorrect);
         $("#contentBox").hide();

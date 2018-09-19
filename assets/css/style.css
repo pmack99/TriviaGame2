@@ -25,6 +25,11 @@ body{
 
 }
 
+.countdowntimerBo{
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
 .container{
     display: none;
     height:500px;
