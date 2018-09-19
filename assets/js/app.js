@@ -126,6 +126,7 @@ $('#reStartBtn').on('click', function () {
     $("#quizContainer").show();
     $("#message").empty();
     newGame();
+    timer();
     loadQuestion();
 });
 
@@ -139,9 +140,12 @@ function timer(){
         unanswered++;
         currentQuestion++;
         timeleft = 30;
-    
         loadNextQuestion(currentQuestion);
+    if (currentQuestion == totQuestions) {
+        endGame()
+    }
 }
+ 
 }
 function newGame(){
     $('#finalMessage').empty();
@@ -153,6 +157,28 @@ function newGame(){
     incorrectAnswer = 0;
     unanswered = 0;
     timeleft = 30;   
+}
+
+function endGame(){
+
+    $("#quizContainer").hide();
+    $('#resultsContainer').show();
+    $('#finalMessage').show();
+    $('#finalMessage').html(messages.finished);
+    $('#correctAnswers').show();
+    $('#correctAnswers').html("Correct = " + correctAnswer);
+    $('#incorrectAnswers').show();
+    $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
+    $('#unanswered').html("Unanswered = " + unanswered);
+    $('#reStartBtn').show();
+    if (correctAnswer > incorrectAnswer){
+        var sound = document.getElementById("audio_four");
+        sound.play();
+    }
+    if (incorrectAnswer > correctAnswer){
+        var sound = document.getElementById("audio_two");
+        sound.play();
+    }
 }
 
     
@@ -214,7 +240,7 @@ function checkAnswer() {
 
     if (currentQuestion == totQuestions) {
 
-        $("#quizContainer").hide();
+       $("#quizContainer").hide();
         $('#resultsContainer').show();
         $('#finalMessage').show();
         $('#finalMessage').html(messages.finished);
@@ -223,15 +249,15 @@ function checkAnswer() {
         $('#incorrectAnswers').show();
         $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
         $('#unanswered').html("Unanswered = " + unanswered);
-        $('#reStartBtn').show();
+       $('#reStartBtn').show();
         if (correctAnswer > incorrectAnswer){
             var sound = document.getElementById("audio_four");
             sound.play();
         }
         if (incorrectAnswer > correctAnswer){
-            var sound = document.getElementById("audio_two");
+           var sound = document.getElementById("audio_two");
             sound.play();
-        }
+     }
 
     }
     loadNextQuestion(currentQuestion);
