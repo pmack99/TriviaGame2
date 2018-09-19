@@ -194,25 +194,30 @@ function checkAnswer() {
     if (questions[currentQuestion].answer == answer) {
         correctAnswer++;
         currentQuestion++;
+        
         $('#message').html(messages.correct);
         $("#contentBox").hide();
+
         var sound = document.getElementById("audio");
         sound.play();
-            window.setTimeout(function(){
-        $("#contentBox").show();   
-        $("#message").empty();
+
+        window.setTimeout(function(){
+            $("#contentBox").show();   
+            $("#message").empty();
          }, 3000);
-        loadNextQuestion();
+        
         
 
     } else {
         currentQuestion++;
         incorrectAnswer++;
+
         $('#message').html(messages.incorrect);
         $("#contentBox").hide();
+
         var sound = document.getElementById("audio_three");
         sound.play();
-        loadNextQuestion();
+        
         
     }
 
@@ -232,7 +237,7 @@ function checkAnswer() {
 
         return;
     }
-    
+    loadNextQuestion();
 }
 
 loadQuestion(currentQuestion);
