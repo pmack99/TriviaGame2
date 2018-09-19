@@ -139,32 +139,10 @@ function timer(){
         unanswered++;
         currentQuestion++;
         timeleft = 30;
-    if (currentQuestion < 9) {
-            loadNextQuestion(currentQuestion);
-     }else {
-        $("#quizContainer").hide();
-        $('#resultsContainer').show();
-        $('#finalMessage').show();
-        $('#finalMessage').html(messages.finished);
-        $('#correctAnswers').show();
-        $('#correctAnswers').html("Correct = " + correctAnswer);
-        $('#incorrectAnswers').show();
-        $('#incorrectAnswers').html("Incorrect = " + incorrectAnswer);
-        $('#unanswered').html("Unanswered = " + unanswered);
-        $('#reStartBtn').show();
-        if (correctAnswer > incorrectAnswer){
-            var sound = document.getElementById("audio_four");
-            sound.play();
-        }
-        if (incorrectAnswer > correctAnswer){
-            var sound = document.getElementById("audio_two");
-            sound.play();
-        }
-            }
-        }
-
+    
+        loadNextQuestion(currentQuestion);
 }
-
+}
 function newGame(){
     $('#finalMessage').empty();
     $('#correctAnswers').empty();
